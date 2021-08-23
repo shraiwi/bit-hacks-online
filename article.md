@@ -4,6 +4,8 @@ This is a primer on binary, numbering systems, and how we can leverage the prope
 
 This entire website was hand-coded from scratch and with a lot of love. I hope you learn something!
 
+P.S. If you don’t feel like reading, just take a listen to the prerecorded audio of me reading it out, and follow along on a sheet of paper.
+
 ## What is binary?
 
 The top definition of binary on Google is:
@@ -127,10 +129,122 @@ This is a bitfield! =>
 
 It is an intuitive representation of a binary number, where each checkbox represents a single bit.
 
-If you hover over the bitfield, you'll see the decimal value of each bit.
+If you hover over the bitfield, you'll see the place values for each bit.
 
 To the right of all the checkboxes is the decimal value of the binary number.
 
 While the bitfield above is **eight bits**, bitfields can be of all sizes!
 
 (They get a lot more unwieldy as they get bigger)
+
+## Digit shifting
+
+When you were shifting the bits around in the activity above, did you notice anything interesting about the way the number’s value changed?
+
+You may have noticed that every time you shift the bits left, the value doubles, and every time you shift the bits right, the value halves.
+
+Why is this?
+
+Well, let’s see what this digit shifting operation does to a decimal number.
+
+For example, "13" shifted to the left is "130". This means that a left shift multiplies the number’s value by a factor of ten. Let’s shift "13" to the right. This results in "1", since the rightmost digit is discarded. Therefore, a right shift is equivalent to dividing by ten and rounding down.
+
+When we write this out, a digit shift essentially increments or decrements the place value’s power in each digit.
+
+**Before shift**
+
+| Digit       | 1              | 3              | 0*              |
+| ----------- | -------------- | -------------- | --------------- |
+| Place Value | 10<sup>1</sup> | 10<sup>0</sup> | 10<sup>-1</sup> |
+| Real Value  | 1 * 10 = 10    | 3 * 1 = 3      | 0 * 0.1 = 0     |
+
+*Since "0" has a fractional place value, we omit this from the actual number’s representation.
+
+10 + 3 + 0 = **13**
+
+**After left shift**
+
+| Digit       | 1                | 3                | 0                 |
+| ----------- | ---------------- | ---------------- | ----------------- |
+| Place Value | 10<sup>1+1</sup> | 10<sup>0+1</sup> | 10<sup>-1+1</sup> |
+| Real Value  | 1 * 100 = 100    | 3 * 10 = 30      | 2 * 1 = 0         |
+
+100 + 30 + 0 = **130**
+
+This is an extremely useful property of decimal.
+
+You’ve probably used digit shifting in your daily life to speed up math without even knowing it. When multiplying by a power of ten, it’s easier to just shift the digits left as opposed to multiplying it all out. The same goes for division by a power of ten. We can simply shift the digits right instead. So, if a base *ten* digit shift multiplies or divides a number’s value by a power of *ten*, what would a base *two* bit shift do?
+
+If you guessed that it multiplies or divides by a power of *two*, you’d be right.
+
+You can see this happening in front of your eyes by dragging the bitfield horizontally and observing the value.
+
+## What is it?
+
+The multiply shift is an elegant way to multiply a binary number by a constant fractional value without using floating point math.
+
+## Why hack bits?
+
+In computers, floating-point numbers are a binary format for holding real values using scientific notation. The main gripe with floating point that many computer programmers have is that it is extremely slow to do arithmetic with when compared to integers. Without a dedicated piece of hardware for it, floating point math is often tens of times slower than integer math, which is why I– among many other people– avoid it like the plague.
+
+The multiply shift is over twice as fast compared to just using raw floating point, which makes it a useful tool in computationally constrained environments. Keep in mind that the speed figure was computed on a system that has dedicated hardware for speeding up floating-point math. If my computer didn’t have that, the speedup would’ve been even more drastic.
+
+## How does it work?
+
+The multiply shift works like this:
+
+1. Multiply a number by a constant value
+2. Shift it right by a constant value
+
+Conceptually, it’s very simple, but there’s a lot of cool math behind it.
+
+Let’s first turn it into a mathematical expression:
+
+n * (m / 2<sup>s</sup>)
+
+Where *n* is one multiplicand, *m* is the an integer scaling value and *s* is the right shift value.
+
+Essentially, we are multiplying *n* by a fraction with a positive integral numerator and denominator that is a power of two.
+
+This means that the multiply shift is simply an approximation for a fraction.
+
+Once we convert our target number into a fraction, we can determine its multiply shift. For example, let’s try to use this to convert from degrees Celsius to degrees Fahrenheit. The equation is as follows:
+
+(C * 9 / 5) + 32 = F
+
+As you can see, there’s a fraction within the equation. We want our multiply shift approximation to be as close as possible to that. So, let’s set up the equation:
+
+9 / 5 = m / 2<sup>s</sup>
+
+Since we have two variables, we can’t solve for it yet.
+
+I’m going to randomly set *s* to eight. I chose this because shift value determines how many useful bits the result will have. Since we are using 32-bit numbers, shifting right 8 bits will leave us with 24 usable bits (since shifting right discards bits). This introduces a trade-off. As *s* gets higher, the approximation becomes more accurate. However, you have a lesser range of values to work with. When making your own implementations, just use common sense to choose a value for *s*.
+
+m / 2<sup>8</sup> = 9 / 5
+
+~~2<sup>8</sup>~~ * m / ~~2<sup>8</sup>~~ = 2<sup>8</sup> * (9 / 5) 
+
+m = **461**
+
+So that means our multiply shift fraction is now equivalent to:
+
+461 / 256 = 1.80078125
+
+Which is pretty close to 9 / 5 (1.8)
+
+With those numbers calculated, we can now substitute it all in to get the equation:
+
+(C * 461) >> 8 + 32 = F
+
+Where ">>" is the right shift operator.
+
+On my machine, the multiply-shift version is over *three times faster* than the floating-point equation!
+
+The multiply shift is one of many tools that can be used to speed up calculations on a computer. Hopefully, you understood the math and found it beautiful. It’s one of my favorite bit tricks.
+
+Thank you for reading, I hope you had fun!
+
+(I know I did ;D)
+
+
+

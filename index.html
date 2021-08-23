@@ -20,6 +20,10 @@
         <p>This is a primer on binary, numbering systems, and how we can leverage the properties of the binary numbering
             system to do some really cool math (to optimize computers)!</p>
         <p>This entire website was hand-coded from scratch and with a lot of love. I hope you learn something!</p>
+        <p>- Shraiwi :D</p>
+
+        <p>P.S. Most of the interactive content on this website doesn't
+            work with touchscreens yet. Please use a desktop web browser and mouse.</p>
     </div>
 
     <div class="chunk hr">
@@ -128,9 +132,6 @@
         <input id="3" type="checkbox">
 
         <div class="content">
-            <audio controls>
-                <source src="audio/test.mp3">
-            </audio>
 
             <p>Remember place values?</p>
             <p>Place values are the &quot;weighting&quot; of each digit within a number. Using place values and a some
@@ -258,97 +259,320 @@
         <h1>Bitfield basics</h1>
         <div class="content">
 
-        <fieldset class="bitfield" bits=8>
-            <div style="margin-right: 12px;">This is a bitfield! =></div>
-        </fieldset>
-        <p>It is an intuitive representation of a binary number, where each checkbox represents a single bit.</p>
-        <p>If you hover over the bitfield, you&#39;ll see the place value of each bit.</p>
-        <p>To the right of all the checkboxes is the decimal value of the binary number.</p>
-        <p>Although the bitfield above is <strong>eight bits</strong>, bitfields can be of all sizes!</p>
-        <fieldset class="bitfield" bits=4 value=12>
-            <div style="margin-right: 12px;">4 bits =></div>
-        </fieldset><br>
-        <fieldset class="bitfield" bits=16 value=1234>
-            <div style="margin-right: 12px;">16 bits =></div>
-        </fieldset><br>
-        <fieldset class="bitfield" bits=24>
-            <div style="margin-right: 12px;">24 bits =></div>
-        </fieldset>
-        <p>
-            (They get a lot more unwieldy as they get bigger)
-        </p>
+            <fieldset class="bitfield" bits=8>
+                <div style="margin-right: 12px;">This is a bitfield! =></div>
+            </fieldset>
+            <p>It is an intuitive representation of a binary number, where each checkbox represents a single bit.</p>
+            <p>If you hover over the bitfield, you&#39;ll see the place value of each bit.</p>
+            <p>To the right of all the checkboxes is the decimal value of the binary number.</p>
+            <p>Although the bitfield above is <strong>eight bits</strong>, bitfields can be of all sizes!</p>
+            <fieldset class="bitfield" bits=4 value=12>
+                <div style="margin-right: 12px;">4 bits =></div>
+            </fieldset><br>
+            <fieldset class="bitfield" bits=16 value=1234>
+                <div style="margin-right: 12px;">16 bits =></div>
+            </fieldset><br>
+            <fieldset class="bitfield" bits=24>
+                <div style="margin-right: 12px;">24 bits =></div>
+            </fieldset>
+            <p>
+                (They get a lot more unwieldy as they get bigger)
+            </p>
         </div>
     </div>
 
     <!-- Messing with Bitfields -->
     <div class="chunk">
         <h1>Messing with Bitfields</h1>
-        <div class="content">
         <div class="icon cross" id="p0-c0"></div>
-        <p>Here's an enabled bitfield for you to mess with.</p>
-        <fieldset id="p0-bf0" class="bitfield" bits=4></fieldset>
-        <p>For this first exercise, try to set the bitfield's value to five.</p>
-        <div class="hint" hint="
-        Check the boxes whose total equals five.
+
+        <div class="content">
+            <p>Here's an enabled bitfield for you to mess with.</p>
+            <fieldset id="p0-bf0" class="bitfield" bits=4></fieldset>
+            <p>For this first exercise, try to set the bitfield's value to five.</p>
+            <div class="hint" hint="
+        Check the boxes so that their place values sum to five.
         ">
-            Hint 1
-        </div>
-        <div class="hint" hint="
-        Check the checkboxes valued &quot;1&quot; and &quot;4&quot;. Since 1 + 4
+                Hint 1
+            </div>
+            <div class="hint" hint="
+        Check the checkboxes with the place values &quot;1&quot; and &quot;4&quot;. Since 1 + 4
         = 5, this is the solution!
         ">
-            Solution
-        </div>
+                Solution
+            </div>
 
-        <script>
-            const p0bf0 = document.getElementById("p0-bf0");
-            const p0c0 = document.getElementById("p0-c0");
+            <script>
+                const p0bf0 = document.getElementById("p0-bf0");
+                const p0c0 = document.getElementById("p0-c0");
 
-            p0bf0.addEventListener("valuechange", (ev) => {
-                const newValue = ev.detail;
-                if (newValue === 5) {
-                    p0c0.classList.remove("cross");
-                    p0c0.classList.add("check");
-                    alert("You got it! Good job!")
-                }
-            });
-        </script>
+                p0bf0.addEventListener("valuechange", (ev) => {
+                    setTimeout(() => {
+                        const newValue = ev.detail;
+                        if (newValue === 5) {
+                            p0c0.classList.remove("cross");
+                            p0c0.classList.add("check");
+                            alert("You got it! Good job!")
+                        }
+                    }, 50);
+                });
+            </script>
         </div>
     </div>
+
     <!-- Advanced Bitfield Usage -->
     <div class="chunk">
-        <h1>Advanced Bitfield Usage</h1>
+        <h1>Advanced bitfield usage</h1>
 
         <div class="content">
-        <fieldset class="bitfield" bits=8 value=1></fieldset>
+            <fieldset class="bitfield" bits=8 value=1></fieldset>
 
-        <p>
-            Bitfields have some extra controls, for ease of use:
-        <ol>
-            <li>You can double click the bitfield to set its value directly. Try it!</li>
-            <li>
-                Click and drag the bitfield's checkboxes left and right to
-                shift the bits left or right.
-            </li>
-        </ol>
+            <p>
+                Bitfields have some extra controls, for ease of use:
+            <ol>
+                <li>You can double click the bitfield to set its value directly. Try it!</li>
+                <li>
+                    Click and drag the bitfield's checkboxes left and right to
+                    shift the bits left or right.
+                </li>
+            </ol>
 
-        </p>
+            </p>
         </div>
     </div>
 
+    <!-- Digit shifting -->
     <div class="chunk">
-        <h1>Bit shifts</h1>
-        <div class="icon cross" id="c2-c0"></div>
+        <label for="4">
+            <h1>Digit shifting</h1>
+        </label>
+        <input id="4" type="checkbox">
 
+        <div class="content">
+            <p>When you were shifting the bits around in the activity above, did you notice anything interesting about
+                the way the number’s value changed?</p>
+            <p>You may have noticed that every time you shift the bits left, the value doubles, and every time you shift
+                the bits right, the value halves.</p>
+            <p>Why is this?</p>
+            <p>Well, let’s see what this digit shifting operation does to a decimal number.</p>
+            <p>For example, &quot;13&quot; shifted to the left is &quot;130&quot;. This means that a left shift
+                multiplies the number’s value by a factor of ten. Let’s shift &quot;13&quot; to the right. This results
+                in &quot;1&quot;, since the rightmost digit is discarded. Therefore, a right shift is equivalent to
+                dividing by ten and rounding down.</p>
+            <p>When we write this out, a digit shift essentially increments or decrements the place value’s power in
+                each digit.</p>
+            <p><strong>Before shift</strong></p>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Digit</th>
+                            <th>1</th>
+                            <th>3</th>
+                            <th>0*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Place Value</td>
+                            <td>10<sup>1</sup></td>
+                            <td>10<sup>0</sup></td>
+                            <td>10<sup>-1</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Real Value</td>
+                            <td>1 * 10 = 10</td>
+                            <td>3 * 1 = 3</td>
+                            <td>0 * 0.1 = 0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <p>*Since &quot;0&quot; has a fractional place value, we omit this from the actual number’s representation.
+            </p>
+            <p>10 + 3 + 0 = <strong>13</strong></p>
+            <p><strong>After left shift</strong></p>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Digit</th>
+                            <th>1</th>
+                            <th>3</th>
+                            <th>0</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Place Value</td>
+                            <td>10<sup>1+1</sup></td>
+                            <td>10<sup>0+1</sup></td>
+                            <td>10<sup>-1+1</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Real Value</td>
+                            <td>1 * 100 = 100</td>
+                            <td>3 * 10 = 30</td>
+                            <td>2 * 1 = 0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <p>100 + 30 + 0 = <strong>130</strong></p>
+            <p>This is an extremely useful property of decimal.</p>
+            <p>You’ve probably used digit shifting in your daily life to speed up math without even knowing it. When
+                multiplying by a power of ten, it’s easier to just shift the digits left as opposed to multiplying it
+                all out. The same goes for division by a power of ten. We can simply shift the digits right instead. So,
+                if a base <em>ten</em> digit shift multiplies or divides a number’s value by a power of <em>ten</em>,
+                what would a base <em>two</em> bit shift do?</p>
+            <p>If you guessed that it multiplies or divides by a power of <em>two</em>, you’d be right.</p>
+            <p>You can see this happening in front of your eyes by dragging the bitfield horizontally and observing the
+                value.</p>
+        </div>
     </div>
+
+    <!-- Messing with left shifts -->
+    <div class="chunk">
+        <h1>Messing with left shifts</h1>
+        <div class="icon cross" id="p1-c0"></div>
+
+        <div class="content">
+
+            <fieldset id="p1-bf0" class="bitfield" bits=8 value=25></fieldset>
+            <p>For this exercise, try to set the bitfield's value to 100 without toggling any bits.</p>
+            <div class="hint" hint="
+        Drag the bits left 2 places. 25 * (2 ^ 2) = 100
+        ">
+                Solution
+            </div>
+
+            <script>
+                const p1bf0 = document.getElementById("p1-bf0");
+                const p1c0 = document.getElementById("p1-c0");
+
+                p1bf0.addEventListener("valuechange", (ev) => {
+                    setTimeout(() => {
+                        const newValue = ev.detail;
+                        if (newValue === 100) {
+                            p1c0.classList.remove("cross");
+                            p1c0.classList.add("check");
+                            alert("You got it! Good job!")
+                        }
+                    }, 50);
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- Messing with right shifts -->
+    <div class="chunk">
+        <h1>Messing with right shifts</h1>
+        <div class="icon cross" id="p2-c0"></div>
+
+        <div class="content">
+
+            <fieldset id="p2-bf0" class="bitfield" bits=8 value=51></fieldset>
+            <p>For this exercise, try to set the bitfield's value to 6 without toggling any bits.</p>
+            <div class="hint" hint="
+        Remember that a right shift rounds down
+        ">
+                Hint 1
+            </div>
+            <div class="hint" hint="
+        Drag the bits right 3 places. floor(51 / (2 ^ 3)) = 6
+        ">
+                Solution
+            </div>
+
+            <script>
+                const p2bf0 = document.getElementById("p2-bf0");
+                const p2c0 = document.getElementById("p2-c0");
+
+                p2bf0.addEventListener("valuechange", (ev) => {
+                    setTimeout(() => {
+                        const newValue = ev.detail;
+                        if (newValue === 6) {
+                            p2c0.classList.remove("cross");
+                            p2c0.classList.add("check");
+                            alert("You got it! Good job!")
+                        }
+                    }, 50);
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- Putting it all together: The multiply shift -->
+    <div class="chunk">
+        <label for="5">
+            <h1>Putting it all together: The multiply shift</h1>
+        </label>
+        <input id="5" type="checkbox">
+
+        <div class="content">
+            <h2>What is it?</h2>
+            <p>The multiply shift is an elegant way to multiply a binary number by a constant fractional value without
+                using floating point math.</p>
+            <h2>Why hack bits?</h2>
+            <p>In computers, floating-point numbers are a binary format for holding real values using scientific
+                notation. The main gripe with floating point that many computer programmers have is that it is extremely
+                slow to do arithmetic with when compared to integers. Without a dedicated piece of hardware for it,
+                floating point math is often tens of times slower than integer math, which is why I– among many other
+                people– avoid it like the plague.</p>
+            <p>The multiply shift is over twice as fast compared to just using raw floating point, which makes it a
+                useful tool in computationally constrained environments. Keep in mind that the speed figure was computed
+                on a system that has dedicated hardware for speeding up floating-point math. If my computer didn’t have
+                that, the speedup would’ve been even more drastic.</p>
+            <h2>How does it work?</h2>
+            <p>The multiply shift works like this:</p>
+            <ol>
+                <li>Multiply a number by a constant value</li>
+                <li>Shift it right by a constant value</li>
+
+            </ol>
+            <p>Conceptually, it’s very simple, but there’s a lot of cool math behind it.</p>
+            <p>Let’s first turn it into a mathematical expression:</p>
+            <p>n * (m / 2<sup>s</sup>)</p>
+            <p>Where <em>n</em> is one multiplicand, <em>m</em> is the an integer scaling value and <em>s</em> is the
+                right shift value.</p>
+            <p>Essentially, we are multiplying <em>n</em> by a fraction with a positive integral numerator and
+                denominator that is a power of two.</p>
+            <p>This means that the multiply shift is simply an approximation for a fraction.</p>
+            <p>Once we convert our target number into a fraction, we can determine its multiply shift. For example,
+                let’s try to use this to convert from degrees Celsius to degrees Fahrenheit. The equation is as follows:
+            </p>
+            <p>(C * 9 / 5) + 32 = F</p>
+            <p>As you can see, there’s a fraction within the equation. We want our multiply shift approximation to be as
+                close as possible to that. So, let’s set up the equation:</p>
+            <p>9 / 5 = m / 2<sup>s</sup></p>
+            <p>Since we have two variables, we can’t solve for it yet.</p>
+            <p>I’m going to randomly set <em>s</em> to eight. I chose this because shift value determines how many
+                useful bits the result will have. Since we are using 32-bit numbers, shifting right 8 bits will leave us
+                with 24 usable bits (since shifting right discards bits). This introduces a trade-off. As <em>s</em>
+                gets higher, the approximation becomes more accurate. However, you have a lesser range of values to work
+                with. When making your own implementations, just use common sense to choose a value for <em>s</em>.</p>
+            <p>m / 2<sup>8</sup> = 9 / 5</p>
+            <p><del>2<sup>8</sup></del> * m / <del>2<sup>8</sup></del> = 2<sup>8</sup> * (9 / 5) </p>
+            <p>m = <strong>461</strong></p>
+            <p>So that means our multiply shift fraction is now equivalent to:</p>
+            <p>461 / 256 = 1.80078125</p>
+            <p>Which is pretty close to 9 / 5 (1.8)</p>
+            <p>With those numbers calculated, we can now substitute it all in to get the equation:</p>
+            <p>(C * 461) &gt;&gt; 8 + 32 = F</p>
+            <p>Where &quot;&gt;&gt;&quot; is the right shift operator.</p>
+            <p>On my machine, the multiply-shift version is over <em>three times faster</em> than the floating-point
+                equation!</p>
+            <p>The multiply shift is one of many tools that can be used to speed up calculations on a computer.
+                Hopefully, you understood the math and found it beautiful. It’s one of my favorite bit tricks.</p>
+            <p>Thank you for reading, I hope you had fun!</p>
+            <p>(I know I did ;D)</p>
+        </div>
+    </div>
+
+
     <script>
         // apply BinaryShifter to all bitfields
         [...document.getElementsByClassName("bitfield")].forEach(BinaryShifter.applyTo);
-
-        // enable unix epoch bitfield
-        setTimeout(() => {
-
-        })
     </script>
 </body>
 
