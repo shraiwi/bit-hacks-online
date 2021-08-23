@@ -1,0 +1,250 @@
+* {
+    font-family: monospace;
+    color: white;
+}
+
+@keyframes fadein {
+    0% { position: absolute; opacity: 0; }
+    1% { position: static; opacity: 0; }
+    100% { position: static; opacity: 1; }
+}
+
+@keyframes fadeout {
+    0% { position: static; opacity: 1; }
+    1% { position: absolute; opacity: 1; }
+    100% { position: absolute; opacity: 0; }
+}
+
+:root {
+    --blue-dark: rgb(29, 38, 49);
+    --blue-light: rgb(47, 62, 79);
+}
+
+html {
+    background-color: var(--blue-dark);
+}
+
+body {
+    margin: 0 auto;
+    padding: 0 24px;
+    max-width: 960px;
+}
+
+br2 {
+    display: block;
+    height: 1em;
+}
+
+/* chunk */
+
+.chunk {
+    margin: 24px 0;
+    padding: 24px 24px;
+
+    overflow: auto;
+    
+    display: block;
+    background-color: var(--blue-light);
+}
+
+.chunk.hr {
+    border: 4px dashed var(--blue-light);
+    background-color: unset;
+    text-align: center;
+
+    font-size: 70%;
+}
+
+.chunk h1 {
+    margin: 0;
+}
+
+.chunk .content {
+    padding-top: 12px;
+}
+
+.chunk > label + input[type="checkbox"] {
+    display: none;
+}
+
+.chunk > label {
+    display: block;
+}
+
+.chunk > label + input[type="checkbox"] + .content  {
+    font-size: 0;
+    opacity: 0;
+
+    padding-top: 0;
+    margin-top: -16px;
+    margin-bottom: 16px;
+
+    transition: all 0.3s 0.3s, opacity 0.3s;
+}
+
+.chunk > label + input[type="checkbox"] + .content *:not(p) {
+    animation: fadeout 0.5s 0.3s forwards;
+}
+
+.chunk > label + input[type="checkbox"]:checked + .content  {
+    font-size: 100%;
+    opacity: 1; 
+
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 12px;
+
+    transition: all 0.3s, opacity 0.3s 0.3s, margin 0.5s 0.25s cubic-bezier(.17, .67, 0, 1);
+}
+
+.chunk > label + input[type="checkbox"]:checked + .content *:not(p) {
+    animation: fadein 0.5s forwards;
+}
+
+.chunk > label::after {
+    transition-duration: 150ms;
+    content: "v";
+    text-align: center;
+    position: absolute;
+    opacity: 0;
+    margin-top: -7px;
+    left: 0;
+    right: 0;
+}
+
+.chunk > label:hover:after {
+    margin-top: 0;
+    opacity: 1;
+}
+
+table, th, td {
+    border: 1px solid
+}
+
+th, td {
+    padding: 8px;
+}
+
+/* cross */ 
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v97/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon::before, button.icon {
+    font-family: "Material Icons";
+    direction: ltr;
+    
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    font-size: large;
+}
+
+.icon::before { padding-right: 8px; }
+
+button.icon {
+    display: block;
+}
+
+.cross::before { content: "close"; color: coral; }
+.cross::after { content: "Not Done"; }
+
+.check::before { content: "check"; color: seagreen; }
+.check::after { content: "Done"; }
+
+/* hint */
+
+.hint {
+    padding: 12px;
+    display: block;
+    font-weight: bold;
+    font-size: large;
+    background-color: var(--blue-dark);
+}
+
+.hint::after {
+    display: none;
+    content: attr(hint);
+    padding-top: 12px;
+    font-size: initial;
+    font-weight: initial;
+}
+
+.hint:hover::after {
+    display: block;
+}
+
+.hint + .hint {
+    border-top: 4px dashed var(--blue-light);
+}
+
+/* animations */
+
+@keyframes pulsecolor {
+    from { color: coral; }
+    to { background-color: initial; }
+}
+
+/* bitfield */
+
+fieldset.bitfield {
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    cursor: grab;
+}
+
+fieldset.bitfield:disabled,
+fieldset.bitfield:disabled > input[type="checkbox"] {
+    cursor: not-allowed;
+}
+
+fieldset.bitfield > input[type="checkbox"] { 
+    margin: 2px;
+    width: 16px;
+    height: 16px;
+    display: inline;
+    cursor: grab;
+}
+
+fieldset.bitfield > input[type="checkbox"]::before { 
+    opacity: 0;
+    transition-duration: 150ms;
+    pointer-events: none;
+    content: attr(bitvalue);
+    display: inline-block;
+    margin-top: 0;
+    transform-origin: 0 100%;
+    transform: rotate(90deg);
+    background-color: var(--blue-dark);
+    outline: 5px solid var(--blue-dark);
+}
+
+fieldset.bitfield:hover > input[type="checkbox"]::before { 
+    margin-top: 12px;
+    opacity: 1;
+}
+
+fieldset.bitfield:active,
+fieldset.bitfield:active > input[type="checkbox"] { 
+    cursor: grabbing; 
+}
+
+fieldset.bitfield::after {
+    content: attr(value);
+    font-weight: bold;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    
+}

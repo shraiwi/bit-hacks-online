@@ -1,0 +1,355 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bit Hacks!</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="src/binary-shifter.js"></script>
+</head>
+
+<body>
+    <!-- Bit Hacks! -->
+    <div class="chunk">
+        <h1>Bit Hacks!</h1>
+        <p>This is a primer on binary, numbering systems, and how we can leverage the properties of the binary numbering
+            system to do some really cool math (to optimize computers)!</p>
+        <p>This entire website was hand-coded from scratch and with a lot of love. I hope you learn something!</p>
+    </div>
+
+    <div class="chunk hr">
+        <h1>Getting up to speed on binary</h1>
+    </div>
+
+    <div class="chunk">
+        <label for="1">
+            <h1>What is binary?</h1>
+        </label>
+        <input id="1" type="checkbox">
+
+        <div class="content">
+            <p>The top definition of binary on Google is:</p>
+            <p><em>relating to, composed of, or involving two things.</em></p>
+            <p>Here are some examples of binary pairs:</p>
+            <ul>
+                <li>Yes and no</li>
+                <li>On and off</li>
+                <li>True and false</li>
+
+            </ul>
+            <p>So now that we know the definition of <em>the word</em> binary, what is binary within the context of
+                computers?</p>
+            <p>Well, binary is a base-two numbering system. In plain English, that means that each digit of a binary
+                number
+                is… well… binary. It can have one of <em>two</em> possible values: one or zero. This is opposed to the
+                most
+                common numbering system, decimal, whose digits can have only one of <em>ten</em> possible values.</p>
+            <p>When trying to understand binary, it’s important to discern between numbers and values. </p>
+            <p>A number is a representation of a value.</p>
+            <p>For example, “5” is not a value. It is a number, which represents a value. This value can also be
+                represented
+                by:</p>
+            <ul>
+                <li>The word “five”</li>
+                <li>The number of fingers on one human hand</li>
+                <li>The binary number 0101</li>
+                <li>etc.</li>
+
+            </ul>
+            <p>Since there’s no real-world object that <em>is</em> 5, humans have come up with standardized systems that
+                can
+                <em>represent</em> the value 5.
+            </p>
+            <p>Binary is an example of such a system.</p>
+            <p>So how does it work? Let’s try to understand by figuring out how to count.</p>
+        </div>
+    </div>
+
+    <!-- How to count -->
+    <div class="chunk">
+        <label for="2">
+            <h1>How to count</h1>
+        </label>
+        <input id="2" type="checkbox">
+
+        <div class="content">
+            <p>You&#39;re probably thinking, </p>
+            <p><em>&quot;Uhm. I think I know how to count...&quot;</em></p>
+            <p>..And you&#39;d be right.</p>
+            <p>But how does counting logically work? If we can figure that out, we use those rules to increment a binary
+                number.</p>
+            <p>Let&#39;s start by counting from zero:</p>
+            <p>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ?</p>
+            <p>Obviously, next number is 10, but why is it 10? Well, the reason becomes clearer when we count with
+                numbers
+                formatted like this:</p>
+            <p>00, 01, 02, 03, 04, 05, 06, 07, 08, 09, <strong>10</strong></p>
+            <p>Although this represents the same sequence, we now get an inkling as to how the number system works. </p>
+            <p>Firstly, when we are incrementing the number as a whole, we are actually incrementing the rightmost
+                digit.
+                When we increment a digit at its maximum value, we simply increment the digit to the left of it and
+                reset
+                the current digit&#39;s value. Keep in mind that we apply the same rules when we increment the digit to
+                the
+                left of the current one.</p>
+            <p>In this case, the rightmost digit of &quot;09&quot; was at its maximum value, so we reset it to a
+                &quot;0&quot; and incremented the digit to the left of it from &quot;0&quot; to &quot;1&quot;,
+                resulting in &quot;10&quot;.</p>
+            <p>When incrementing, we treat the number as if there is are infinite zeros to the left of it. These
+                don&#39;t
+                change the value of the number, so they are usually omitted in the written representation of the number.
+            </p>
+            <p>So now that we know the rules behind decimal, let&#39;s apply it to binary!</p>
+            <p>Again, let&#39;s start by counting up from zero (but this time, in binary):</p>
+            <p>0, 1, ?</p>
+            <p>Our rightmost digit is at its maximum value, so let&#39;s increment the digit to the left of it and reset
+                the
+                current digit&#39;s value. Remember how we assume there are infinite zeros to the left of the number.
+            </p>
+            <p>The rightmost &quot;1&quot; becomes &quot;0&quot;, and the implicit &quot;0&quot; to the left of it
+                becomes
+                &quot;1&quot;, resulting in the binary number &quot;10&quot;.</p>
+            <p>Counting further, we get:</p>
+            <p>11, 100, 101, 111, etc.</p>
+            <p>So now that we have the rules for counting in binary, let&#39;s try to mathematically represent it.</p>
+        </div>
+    </div>
+
+    <!-- Positional number systems -->
+    <div class="chunk">
+        <label for="3">
+            <h1>Positional number systems</h1>
+        </label>
+        <input id="3" type="checkbox">
+
+        <div class="content">
+            <audio controls>
+                <source src="audio/test.mp3">
+            </audio>
+
+            <p>Remember place values?</p>
+            <p>Place values are the &quot;weighting&quot; of each digit within a number. Using place values and a some
+                arithmetic, you can easily determine the value of a number. If you remember back from second grade, each
+                decimal digit&#39;s value is ten times more than the one to the right of it, with the rightmost number
+                having a place value of one, like this:</p>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Digit</th>
+                            <th>3</th>
+                            <th>2</th>
+                            <th>1</th>
+                            <th>2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Place Value</td>
+                            <td>1000</td>
+                            <td>100</td>
+                            <td>10</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <p>You could find the value of the number by summing the digits multiplied by their respective place values.
+                Take the example from above:</p>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Digit</th>
+                            <th>3</th>
+                            <th>2</th>
+                            <th>1</th>
+                            <th>2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Place Value</td>
+                            <td>1000</td>
+                            <td>100</td>
+                            <td>10</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Real Value</td>
+                            <td>3 * 1000 = 3000</td>
+                            <td>2 * 100 = 200</td>
+                            <td>1 * 10 = 10</td>
+                            <td>2 * 1 = 2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <p>Which has a value of 3212, which is 3000 + 200 + 10 + 1.</p>
+            <p>So using that representation, let’s try to figure out a general form of positional numbering systems.</p>
+            <p>Let’s start by writing the place values like this:</p>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Digit</th>
+                            <th>3</th>
+                            <th>2</th>
+                            <th>1</th>
+                            <th>2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Place Value</td>
+                            <td>10<sup>3</sup></td>
+                            <td>10<sup>2</sup></td>
+                            <td>10<sup>1</sup></td>
+                            <td>10<sup>0</sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <p>Do you see anything interesting about this representation of place value? </p>
+            <p>Decimal is a base <em>ten</em> system, which means that all the place values are powers of ten.</p>
+            <p>Let’s look at a binary number’s place values:</p>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Digit</th>
+                            <th>1</th>
+                            <th>0</th>
+                            <th>1</th>
+                            <th>1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Place Value</td>
+                            <td>2<sup>3</sup></td>
+                            <td>2<sup>2</sup></td>
+                            <td>2<sup>1</sup></td>
+                            <td>2<sup>0</sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <p>Here’s the common thread: for a base-<em>n</em> number system, a digit in position <em>p</em> (defined as
+                the
+                number of digits in between it and the rightmost number) will have a place value of n<sup>p</sup></p>
+            <p>To calculate the value of any number in any positional numbering system, sum the digits’ values
+                multiplied by
+                their respective place values.</p>
+        </div>
+    </div>
+
+    <div class="chunk hr">
+        <h1>Building binary intuition</h1>
+    </div>
+
+    <!-- Bitfield Basics -->
+    <div class="chunk">
+        <h1>Bitfield basics</h1>
+        <div class="content">
+
+        <fieldset class="bitfield" bits=8>
+            <div style="margin-right: 12px;">This is a bitfield! =></div>
+        </fieldset>
+        <p>It is an intuitive representation of a binary number, where each checkbox represents a single bit.</p>
+        <p>If you hover over the bitfield, you&#39;ll see the place value of each bit.</p>
+        <p>To the right of all the checkboxes is the decimal value of the binary number.</p>
+        <p>Although the bitfield above is <strong>eight bits</strong>, bitfields can be of all sizes!</p>
+        <fieldset class="bitfield" bits=4 value=12>
+            <div style="margin-right: 12px;">4 bits =></div>
+        </fieldset><br>
+        <fieldset class="bitfield" bits=16 value=1234>
+            <div style="margin-right: 12px;">16 bits =></div>
+        </fieldset><br>
+        <fieldset class="bitfield" bits=24>
+            <div style="margin-right: 12px;">24 bits =></div>
+        </fieldset>
+        <p>
+            (They get a lot more unwieldy as they get bigger)
+        </p>
+        </div>
+    </div>
+
+    <!-- Messing with Bitfields -->
+    <div class="chunk">
+        <h1>Messing with Bitfields</h1>
+        <div class="content">
+        <div class="icon cross" id="p0-c0"></div>
+        <p>Here's an enabled bitfield for you to mess with.</p>
+        <fieldset id="p0-bf0" class="bitfield" bits=4></fieldset>
+        <p>For this first exercise, try to set the bitfield's value to five.</p>
+        <div class="hint" hint="
+        Check the boxes whose total equals five.
+        ">
+            Hint 1
+        </div>
+        <div class="hint" hint="
+        Check the checkboxes valued &quot;1&quot; and &quot;4&quot;. Since 1 + 4
+        = 5, this is the solution!
+        ">
+            Solution
+        </div>
+
+        <script>
+            const p0bf0 = document.getElementById("p0-bf0");
+            const p0c0 = document.getElementById("p0-c0");
+
+            p0bf0.addEventListener("valuechange", (ev) => {
+                const newValue = ev.detail;
+                if (newValue === 5) {
+                    p0c0.classList.remove("cross");
+                    p0c0.classList.add("check");
+                    alert("You got it! Good job!")
+                }
+            });
+        </script>
+        </div>
+    </div>
+    <!-- Advanced Bitfield Usage -->
+    <div class="chunk">
+        <h1>Advanced Bitfield Usage</h1>
+
+        <div class="content">
+        <fieldset class="bitfield" bits=8 value=1></fieldset>
+
+        <p>
+            Bitfields have some extra controls, for ease of use:
+        <ol>
+            <li>You can double click the bitfield to set its value directly. Try it!</li>
+            <li>
+                Click and drag the bitfield's checkboxes left and right to
+                shift the bits left or right.
+            </li>
+        </ol>
+
+        </p>
+        </div>
+    </div>
+
+    <div class="chunk">
+        <h1>Bit shifts</h1>
+        <div class="icon cross" id="c2-c0"></div>
+
+    </div>
+    <script>
+        // apply BinaryShifter to all bitfields
+        [...document.getElementsByClassName("bitfield")].forEach(BinaryShifter.applyTo);
+
+        // enable unix epoch bitfield
+        setTimeout(() => {
+
+        })
+    </script>
+</body>
+
+</html>
