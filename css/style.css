@@ -21,9 +21,76 @@
     --blue-lighter: rgb(87, 114, 145);
 }
 
+.floating-video {
+    display: inline-block;
+    position: fixed;
+
+    z-index: 1;
+
+    bottom: 12px;
+    right: 12px;
+
+    width: min-content;
+
+    word-wrap: break-word;
+
+    outline: 4px solid var(--blue-dark);
+    background-color: var(--blue-dark);
+}
+
+.floating-video video {
+    width: 360px;
+
+    transition-duration: 150ms;
+}
+
+.floating-video .floating-video-container {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+.floating-video .floating-video-container::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0px 0px 24px 24px var(--blue-dark);
+    outline: 4px dashed var(--blue-light);
+
+}
+
+.floating-video::before {
+    content: "Click to play/pause, double click to restart";
+
+    pointer-events: none;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    padding: 12px;
+
+    z-index: 1;
+
+    transition-duration: 150ms;
+
+    opacity: 0;
+}
+
+.floating-video:hover::before {
+    opacity: 1;
+}
+
 html {
     background-color: var(--blue-dark);
     font-size: 110%;
+    overflow-x: hidden;
 }
 
 body {
@@ -82,6 +149,7 @@ br2 {
 
 .chunk > label {
     display: block;
+    cursor: pointer;
 }
 
 .chunk > label + input[type="checkbox"] + .content  {
@@ -97,6 +165,7 @@ br2 {
 
 .chunk > label + input[type="checkbox"] + .content *:not(p) {
     animation: fadeout 0.5s 0.3s forwards;
+    pointer-events: none;
 }
 
 .chunk > label + input[type="checkbox"]:checked + .content  {
@@ -112,6 +181,8 @@ br2 {
 
 .chunk > label + input[type="checkbox"]:checked + .content *:not(p) {
     animation: fadein 0.5s forwards;
+    pointer-events: all;
+
 }
 
 .chunk > label::after {
@@ -150,7 +221,7 @@ th, td {
 }
 
 .icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
 
     margin-top: 12px;
@@ -167,9 +238,34 @@ th, td {
 
 .icon::before { padding-right: 8px; }
 
+button.icon:hover {
+    background-color: coral;
+}
+
+button.icon {
+    transition-duration: 150ms;
+
+    cursor: pointer;
+
+    display: block;
+    width: 100%;
+
+    text-align: center;
+
+    background-color: var(--blue-dark);
+    border: none;
+
+    color: white;
+
+    font-size: xx-large;
+
+    margin: 0;
+}
+
+/*
 button.icon {
     display: block;
-}
+}*/
 
 .heart::before { content: "favorite"; color: pink; }
 
