@@ -1,0 +1,12 @@
+"0.webm", "what is binary?"
+"1.webm", "how to count"
+"2.webm", "place values"
+"3.webm", "bitfield basics"
+"4.webm", "p0"
+"5.webm", "advanced bitfield"
+"6.webm", "digit shift"
+"7.webm", "p1"
+"8.webm", "p2"
+"9.webm", ""
+
+

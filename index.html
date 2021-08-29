@@ -28,13 +28,8 @@
         <script>
             const video = document.querySelector("div.floating-video-container video");
 
-            video.sources = [
-                "video/0_what_is_binary.webm",
-                "video/1_counting.webm",
-            ];
-
             video.playSection = (n) => {
-                video.src = video.sources[n];
+                video.src = `video/${n}.webm`;
                 video.oncanplay = () => video.play();
             }
         </script>
@@ -172,6 +167,13 @@
 
         <div class="content">
 
+            <button 
+                class="icon play"
+                onclick="video.playSection(2)"
+            >
+                play_arrow
+            </button>
+
             <p>Remember place values?</p>
             <p>Place values are the &quot;weighting&quot; of each digit within a number. Using place values and a some
                 arithmetic, you can easily determine the value of a number. If you remember back from second grade, each
@@ -298,6 +300,13 @@
         <h1>Bitfield basics</h1>
         <div class="content">
 
+            <button 
+                class="icon play"
+                onclick="video.playSection(3)"
+            >
+                play_arrow
+            </button>
+
             <fieldset class="bitfield" bits=8>
                 <div style="margin-right: 12px;">This is a bitfield! =></div>
             </fieldset>
@@ -326,6 +335,14 @@
         <div class="icon cross" id="p0-c0"></div>
 
         <div class="content">
+
+            <button 
+                class="icon play"
+                onclick="video.playSection(4)"
+            >
+                play_arrow
+            </button>
+
             <p>Here's an enabled bitfield for you to mess with.</p>
             <fieldset id="p0-bf0" class="bitfield" bits=4></fieldset>
             <p>For this first exercise, try to set the bitfield's value to five.</p>
@@ -364,6 +381,12 @@
         <h1>Advanced bitfield usage</h1>
 
         <div class="content">
+            <button 
+                class="icon play"
+                onclick="video.playSection(5)"
+            >
+                play_arrow
+            </button>
             <fieldset class="bitfield" bits=8 value=1></fieldset>
 
             <p>
@@ -388,6 +411,12 @@
         <input id="4" type="checkbox">
 
         <div class="content">
+            <button 
+                class="icon play"
+                onclick="video.playSection(6)"
+            >
+                play_arrow
+            </button>
             <p>When you were shifting the bits around in the activity above, did you notice anything interesting about
                 the way the number’s value changed?</p>
             <p>You may have noticed that every time you shift the bits left, the value doubles, and every time you shift
@@ -477,6 +506,13 @@
 
         <div class="content">
 
+            <button 
+                class="icon play"
+                onclick="video.playSection(7)"
+            >
+                play_arrow
+            </button>
+
             <fieldset id="p1-bf0" class="bitfield" bits=8 value=25></fieldset>
             <p>For this exercise, try to set the bitfield's value to 100 without toggling any bits.</p>
             <div class="hint" hint="
@@ -509,6 +545,13 @@
         <div class="icon cross" id="p2-c0"></div>
 
         <div class="content">
+
+            <button 
+                class="icon play"
+                onclick="video.playSection(8)"
+            >
+                play_arrow
+            </button>
 
             <fieldset id="p2-bf0" class="bitfield" bits=8 value=51></fieldset>
             <p>For this exercise, try to set the bitfield's value to 6 without toggling any bits.</p>
